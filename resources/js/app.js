@@ -1,7 +1,10 @@
 import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
 import { ZiggyVue } from "ziggy";
+import PrimeVue from "primevue/config";
 import "../css/app.css";
+
+import "primevue/resources/themes/md-light-indigo/theme.css";
 
 createInertiaApp({
     resolve: (name) => {
@@ -11,7 +14,9 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
+            .use(PrimeVue)
             .use(ZiggyVue)
+
             .mount(el);
     },
 });
