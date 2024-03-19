@@ -38,8 +38,6 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
 import { Link } from "@inertiajs/vue3";
 import Menubar from "primevue/menubar";
 
-const hidden = ref(true);
-
 // Menu items
 const items = ref([
     {
