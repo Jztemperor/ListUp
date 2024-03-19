@@ -6,7 +6,16 @@ export default {
         "./resources/js/**/*.vue",
     ],
     theme: {
-        extend: {},
+        extend: {
+            // Additional colors
+            colors: {
+                "brand-color": "#3F51B5",
+                "dark-gray": "#222222",
+                "light-gray": "#717171",
+                "pastel-gray": "#F0EFE9",
+                "hover-light": "#0000000a",
+            },
+        },
     },
     plugins: [require("@tailwindcss/forms")],
 };

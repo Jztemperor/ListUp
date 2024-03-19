@@ -4,6 +4,7 @@
     @tailwind base;
 }
 
+/* Overrides for PrimeVue components */
 @layer primevue {
 }
 
