@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref } from "vue";
 import { Link } from "@inertiajs/vue3";
 import Menubar from "primevue/menubar";
 
