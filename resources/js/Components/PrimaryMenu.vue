@@ -22,8 +22,10 @@
         <!-- Render elements after menubar -->
         <template #end>
             <div>
-                <a href="" class="p-[1rem] hover:bg-hover-light rounded"
-                    >Sign Up</a
+                <Link
+                    :href="route('account.create')"
+                    class="p-[1rem] hover:bg-hover-light rounded"
+                    >Sign Up</Link
                 >
                 <a href="" class="p-[1rem] hover:bg-hover-light rounded"
                     >Sign in</a

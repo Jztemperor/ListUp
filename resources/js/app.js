@@ -14,7 +14,11 @@ createInertiaApp({
 
         // Add default layout to all components
         const page = pages[`./Pages/${name}.vue`];
-        page.default.layout = page.default.layout || MainLayout;
+
+        // Exceptions
+        if (name !== "Account/Create") {
+            page.default.layout = page.default.layout || MainLayout;
+        }
 
         return page;
     },

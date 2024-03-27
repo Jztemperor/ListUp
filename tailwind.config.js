@@ -15,6 +15,10 @@ export default {
                 "pastel-gray": "#F0EFE9",
                 "hover-light": "#0000000a",
             },
+
+            backgroundImage: {
+                "auth-background": "url('/resources/images/auth-bg.png')",
+            },
         },
     },
     plugins: [require("@tailwindcss/forms")],
