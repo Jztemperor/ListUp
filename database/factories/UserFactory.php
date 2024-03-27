@@ -24,14 +24,10 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        // Get fake names into vars to reuse for username
-        $fakeFirstname = fake()->firstName();
-        $fakeLastname = fake()->lastName();
 
         return [
-            'first_name' => $fakeFirstname,
-            'last_name' => $fakeLastname,
-            'name' => $fakeFirstname . '.' . $fakeLastname,
+            'first_name' => fake()->firstName(),
+            'last_name' => fake()->lastName(),
             'phone_number' => fake()->phoneNumber(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),

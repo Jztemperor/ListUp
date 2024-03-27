@@ -19,4 +19,4 @@ Route::get('/', [IndexController::class, 'index'])->name('index.index');
 
 // Account controller's route for User (Account) resource
 Route::resource('account', AccountController::class)
-  ->only(['create']);
+  ->only(['create', 'store']);
