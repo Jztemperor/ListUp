@@ -1,16 +1,19 @@
 <template>
-    <div class="grid grid-cols-2 gap-4 h-full">
+    <div class="min-[1010px]:grid grid-cols-2 gap-4 h-full">
         <h1
-            class="absolute text-brand-color font-bold text-3xl tracking-widest p-5"
+            class="sm:fixed sm:block sm:text-brand-color sm:font-bold sm:text-3xl sm:tracking-widest sm:p-5 hidden"
         >
             <Link :href="route('index.index')">ListUp</Link>
         </h1>
         <div class="h-full flex flex-col items-center justify-center">
             <h1 class="text-brand-color text-3xl mb-8">Create an account!</h1>
 
-            <form @submit.prevent="createAccount">
-                <div class="grid gird-cols-2 gap-4">
-                    <div class="col-span-1">
+            <form
+                @submit.prevent="createAccount"
+                class="min-[639px]:w-auto w-11/12"
+            >
+                <div class="grid gird-cols-2 gap-4 pl-2 pr-2">
+                    <div class="sm:col-span-1 col-span-2">
                         <InputGroup>
                             <InputGroupAddon>
                                 <i class="pi pi-user"></i>
@@ -31,7 +34,7 @@
                         </small>
                     </div>
 
-                    <div class="col-span-1">
+                    <div class="sm:col-span-1 col-span-2">
                         <InputGroup class="col-span-1">
                             <InputGroupAddon>
                                 <i class="pi pi-user"></i>
@@ -103,8 +106,9 @@
                                     checkmark
                                     :highlightOnSelect="false"
                                     class="w-full md:w-14rem"
+                                    id="role"
                                 />
-                                <label for="phone"
+                                <label for="role"
                                     >Are you a Realtor or a Customer?</label
                                 >
                             </FloatLabel>
@@ -114,7 +118,7 @@
                         }}</small>
                     </div>
 
-                    <div class="col-span-1">
+                    <div class="sm:col-span-1 col-span-2">
                         <InputGroup class="col-span-1">
                             <InputGroupAddon>
                                 <i class="pi pi-lock"></i>
@@ -136,8 +140,8 @@
                         >
                     </div>
 
-                    <div class="col-span-1">
-                        <InputGroup class="col-span-1">
+                    <div class="sm:col-span-1 col-span-2">
+                        <InputGroup>
                             <InputGroupAddon>
                                 <i class="pi pi-lock"></i>
                             </InputGroupAddon>
@@ -161,18 +165,31 @@
                             class="w-full mb-2"
                             label="Submit"
                         />
-                        <p>
-                            Already have an account?
-                            <Link href="" class="text-brand-color"
-                                >Sign in!</Link
-                            >
-                        </p>
+                        <div class="flex justify-between text-sm sm:text-md">
+                            <p>
+                                Already have an account?
+                                <Link href="" class="text-brand-color"
+                                    >Sign in!</Link
+                                >
+                            </p>
+
+                            <p>
+                                Back to
+                                <Link
+                                    :href="route('index.index')"
+                                    class="text-brand-color"
+                                    >Home</Link
+                                >
+                            </p>
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
 
-        <div class="bg-auth-background bg-bottom bg-cover bg-no-repeat"></div>
+        <div
+            class="hidden min-[1010px]:block bg-auth-background bg-bottom bg-cover bg-no-repeat"
+        ></div>
     </div>
 </template>
 
