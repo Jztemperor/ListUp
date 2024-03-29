@@ -21,14 +21,32 @@
 
         <!-- Render elements after menubar -->
         <template #end>
-            <div>
+            <div v-if="user">
+                <Link
+                    :href="route('account.create')"
+                    class="p-[1rem] hover:bg-hover-light rounded text-light-gray"
+                    >My Account</Link
+                >
+
+                <Link
+                    :href="route('logout')"
+                    method="delete"
+                    class="p-[1rem] hover:bg-hover-light rounded"
+                    as="button"
+                    >Logout</Link
+                >
+            </div>
+
+            <div v-else>
                 <Link
                     :href="route('account.create')"
                     class="p-[1rem] hover:bg-hover-light rounded"
                     >Sign Up</Link
                 >
-                <a href="" class="p-[1rem] hover:bg-hover-light rounded"
-                    >Sign in</a
+                <Link
+                    :href="route('login')"
+                    class="p-[1rem] hover:bg-hover-light rounded"
+                    >Sign in</Link
                 >
             </div>
         </template>
@@ -38,6 +56,8 @@
 <script setup>
 import { ref } from "vue";
 import { Link } from "@inertiajs/vue3";
+import { usePage } from "@inertiajs/vue3";
+import { computed } from "vue";
 import Menubar from "primevue/menubar";
 
 // Menu items
@@ -52,4 +72,8 @@ const items = ref([
     { label: "Calculate Payments", route: "index.index" },
     { label: "Discover", route: "index.index" },
 ]);
+
+// Acces shared props (HandleInertiaRequest.php)
+const page = usePage();
+const user = computed(() => page.props.user);
 </script>

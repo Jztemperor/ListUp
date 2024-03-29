@@ -163,12 +163,14 @@
                         <Button
                             type="submit"
                             class="w-full mb-2"
-                            label="Submit"
+                            label="Register"
                         />
                         <div class="flex justify-between text-sm sm:text-md">
                             <p>
                                 Already have an account?
-                                <Link href="" class="text-brand-color"
+                                <Link
+                                    :href="route('login')"
+                                    class="text-brand-color"
                                     >Sign in!</Link
                                 >
                             </p>

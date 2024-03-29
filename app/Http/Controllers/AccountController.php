@@ -23,6 +23,16 @@ class AccountController extends Controller
         return inertia('Account/Create');
     }
 
+    /**
+     * Create a new user account.
+     *
+     * This method creates a new user account with validated data from the request.
+     * It assigns a role to the user based on the provided role name, and redirects
+     * to the index page upon successful creation.
+     *
+     * @param  \App\Http\Requests\StoreAccountRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(StoreAccountRequest $request)
     {
         $validated = $request->validated();

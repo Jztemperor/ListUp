@@ -16,7 +16,7 @@ createInertiaApp({
         const page = pages[`./Pages/${name}.vue`];
 
         // Exceptions
-        if (name !== "Account/Create") {
+        if (name !== "Account/Create" && name !== "Authentication/Login") {
             page.default.layout = page.default.layout || MainLayout;
         }
 
