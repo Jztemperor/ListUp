@@ -49,7 +49,7 @@ class AccountController extends Controller
         try {
             $role = Role::getRoleByName($validated['role'], $allowedRoles);
         } catch (InvalidArgumentException | ModelNotFoundException $e) {
-            return redirect()->route('index.index'); // TODO: Exception handling with flash messages.
+            return redirect()->route('index.index')->with('error', $e->getMessage()); // TODO: Exception handling with flash messages.
         }
 
         // Assign role
