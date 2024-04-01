@@ -1,5 +1,7 @@
 <template>
     <PrimaryMenu></PrimaryMenu>
+
+    <slot></slot>
 </template>
 
 <script setup>
