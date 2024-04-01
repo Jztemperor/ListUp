@@ -22,10 +22,10 @@ class StoreAccountRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'firstName' => 'required',
-            'lastName' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
             'email' => 'required|email|unique:users',
-            'phone' => array('required', 'regex:/^\(\d{3}\)-\d{3}-\d{4}$/'), // American phone number format
+            'phone_number' => array('required', 'regex:/^\(\d{3}\)-\d{3}-\d{4}$/'), // American phone number format
             'role' => 'required',
             'password' => 'required|min:8|confirmed'
         ];

@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAccountRequest;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use InvalidArgumentException;
 
 /**
  * Controller responsible for handling account-related actions such as registration, updating, and deletion.
@@ -33,35 +36,27 @@ class AccountController extends Controller
      * @param  \App\Http\Requests\StoreAccountRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreAccountRequest $request)
+    public function store(StoreAccountRequest $request): RedirectResponse
     {
+        // Validate request, create user object
         $validated = $request->validated();
+        $user = User::make($validated);
 
-        $user = new User();
-
-        // Assign validated fields to user object
-        $user->first_name = $validated['firstName'];
-        $user->last_name = $validated['lastName'];
-        $user->email = $validated['email'];
-        $user->phone_number = $validated['phone'];
-        $user->password = bcrypt($validated['password']);
+        // Get allowed roles from config
+        $allowedRoles = config('roles.allowed_roles_at_registration');
 
         // Get role
-        $role = Role::where('name', $validated['role'])->first(['id', 'name']);
-
-        // Check to prevent users from chosing a role that is not on the list
-        if ($role && ($role->name == 'Customer' || $role->name == 'Realtor')) {
-            $roleId = $role->id;
-        } else {
-            abort(500); // will be replaced later
+        try {
+            $role = Role::getRoleByName($validated['role'], $allowedRoles);
+        } catch (InvalidArgumentException | ModelNotFoundException $e) {
+            return redirect()->route('index.index'); // TODO: Exception handling with flash messages.
         }
 
         // Assign role
-        $user->role()->associate($roleId);
+        $user->role()->associate($role);
 
+        // Save user
         $user->save();
-
-
         return redirect()->route('index.index');
     }
 }

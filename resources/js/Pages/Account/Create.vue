@@ -21,16 +21,16 @@
                             <FloatLabel>
                                 <InputText
                                     id="firstname"
-                                    v-model="form.firstName"
+                                    v-model="form.first_name"
                                 />
                                 <label for="firstname">First Name</label>
                             </FloatLabel>
                         </InputGroup>
                         <small
                             class="text-red-500"
-                            v-if="form.errors.firstName"
+                            v-if="form.errors.first_name"
                         >
-                            {{ form.errors.firstName }}
+                            {{ form.errors.first_name }}
                         </small>
                     </div>
 
@@ -42,15 +42,15 @@
                             <FloatLabel>
                                 <InputText
                                     id="lastname"
-                                    v-model="form.lastName"
+                                    v-model="form.last_name"
                                 />
                                 <label for="lastname">Last Name</label>
                             </FloatLabel>
                         </InputGroup>
                         <small
                             class="text-red-500"
-                            v-if="form.errors.lastName"
-                            >{{ form.errors.lastName }}</small
+                            v-if="form.errors.last_name"
+                            >{{ form.errors.last_name }}</small
                         >
                     </div>
 
@@ -82,14 +82,16 @@
                                 <InputMask
                                     mask="(999)-999-9999"
                                     id="phone"
-                                    v-model="form.phone"
+                                    v-model="form.phone_number"
                                 />
                                 <label for="phone">Phone</label>
                             </FloatLabel>
                         </InputGroup>
-                        <small class="text-red-500" v-if="form.errors.phone">{{
-                            form.errors.phone
-                        }}</small>
+                        <small
+                            class="text-red-500"
+                            v-if="form.errors.phone_number"
+                            >{{ form.errors.phone_number }}</small
+                        >
                     </div>
 
                     <div class="col-span-2">
@@ -209,10 +211,10 @@ import Dropdown from "primevue/dropdown";
 
 // Init form
 const form = useForm({
-    firstName: null,
-    lastName: null,
+    first_name: null,
+    last_name: null,
     email: null,
-    phone: null,
+    phone_number: null,
     role: null,
     password: null,
     password_confirmation: null,
