@@ -194,6 +194,13 @@
         <div
             class="hidden min-[1010px]:block bg-auth-background bg-bottom bg-cover bg-no-repeat"
         ></div>
+        <div class="fixed bottom-0 right-0 w-full sm:w-auto px-3">
+            <Toast
+            v-if="$page.props.flash.message"
+            :message="$page.props.flash.message.message"
+            :type="$page.props.flash.message.type"
+        />
+  </div>
     </div>
 </template>
 
@@ -208,6 +215,7 @@ import Button from "primevue/button";
 import { Link } from "@inertiajs/vue3";
 import { useForm } from "@inertiajs/vue3";
 import Dropdown from "primevue/dropdown";
+import Toast from "@/Components/Toast.vue";
 
 // Init form
 const form = useForm({

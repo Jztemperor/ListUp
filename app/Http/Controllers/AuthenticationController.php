@@ -41,7 +41,12 @@ class AuthenticationController extends Controller
         $request->session()->regenerate();
 
         // Redirect to home
-        return redirect()->route('index.index');
+        return redirect()->route('index.index')->with([
+            'message' => [
+                'type' => 'success',
+                'message' => 'You have been logged in!'
+            ]
+        ]);
     }
 
     /**
@@ -57,6 +62,11 @@ class AuthenticationController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerate();
 
-        return redirect()->route('index.index');
+        return redirect()->route('index.index')->with([
+            'message' => [
+                'type' => 'success',
+                'message' => 'You have been logged out!'
+            ]
+        ]);
     }
 }

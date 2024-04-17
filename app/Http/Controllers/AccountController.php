@@ -49,7 +49,12 @@ class AccountController extends Controller
         try {
             $role = Role::getRoleByName($validated['role'], $allowedRoles);
         } catch (InvalidArgumentException | ModelNotFoundException $e) {
-            return redirect()->route('index.index')->with('error', $e->getMessage()); // TODO: Exception handling with flash messages.
+            return redirect()->back()->with([
+                'message' => [
+                    'type' => 'error',
+                    'message' => 'You are not allowed to chose this role!'
+                ]
+            ]);
         }
 
         // Assign role
