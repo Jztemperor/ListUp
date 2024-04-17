@@ -26,6 +26,7 @@ import { usePage } from "@inertiajs/vue3";
     onMounted(() => {
         isVisible.value = true;
 
+        // Remove the toast after 3 seconds (or on click)
         setTimeout(() => {
             hideToast();
         }, 3000)
@@ -33,16 +34,18 @@ import { usePage } from "@inertiajs/vue3";
 
     const hideToast = () => {
         isVisible.value = false;
-
+        
         // Need to remove the props so it triggers a re-render
-        page.props.flash.message = null;
+        // Re-render needs to happen after leave animation (0.5s)
+        setTimeout(() => {
+            page.props.flash.message = null;
+        }, 500)
     };
-
 
 
 </script>
 
-<!-- Scoped Styles for different toast types -->
+<!-- Scoped Styles for different toast types, and Transitions -->
 <style scoped>
 .flash-success {
   background-color: #4caf50; 
@@ -55,11 +58,11 @@ import { usePage } from "@inertiajs/vue3";
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s ease !important;
+  transition: opacity 0.5s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
-    opacity: 0 !important;
+    opacity: 0;
 }
 </style>
