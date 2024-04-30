@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -31,31 +32,10 @@ Route::post('login', [AuthenticationController::class, 'store'])->name('login');
 Route::delete('logout', [AuthenticationController::class, 'destroy'])->name('logout');
 
 // Email verification view
-Route::get('/email/verify', function () {
-  return inertia('Verification/verify-email');
-})->middleware('auth')->name('verification.notice');
+Route::get('/email/verify', [EmailVerificationController::class, 'showInstructions'])->middleware('auth')->name('verification.notice');
  
-
 // Fulfill verification
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
- 
-    return redirect('/')->with([
-            'message' => [
-                'type' => 'success',
-                'message' => "You're email has been verified!"
-            ]
-        ]);
-})->middleware(['auth', 'signed'])->name('verification.verify');
+Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'fulfill'])->middleware(['auth', 'signed'])->name('verification.verify');
  
 // Re-send verification link
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
- 
-    return back()->with([
-            'message' => [
-                'type' => 'success',
-                'message' => "Verification email sent!"
-            ]
-        ]);
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+Route::post('/email/verification-notification', [EmailVerificationController::class, 'reSend'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
