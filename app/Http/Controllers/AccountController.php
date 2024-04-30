@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAccountRequest;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -62,6 +63,10 @@ class AccountController extends Controller
 
         // Save user
         $user->save();
-        return redirect()->route('index.index');
+
+        // Send E-mail verification
+        event(new Registered($user));
+
+        return redirect()->route('login');
     }
 }
