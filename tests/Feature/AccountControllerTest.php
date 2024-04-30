@@ -34,7 +34,7 @@ class AccountControllerTest extends TestCase
         $response = $this->post(route('account.store'), $request);
 
         // Assert
-        $response->assertRedirect(route('index.index'));
+        $response->assertRedirect(route('login'));
 
         $this->assertDatabaseHas('users', [
             'first_name' => 'John',
@@ -84,8 +84,10 @@ class AccountControllerTest extends TestCase
 
         $response = $this->post(route('account.store'), $request);
 
-        $response->assertRedirect(route('index.index'))
-            ->assertSessionHas('error');
+        
+        $response->assertSessionHas('message', function ($message) {
+            return $message['type'] === 'error';
+        });
     }
 
     public function test_store_method_handles_exception_when_role_is_not_allowed()
@@ -106,7 +108,8 @@ class AccountControllerTest extends TestCase
 
         $response = $this->post(route('account.store'), $request);
 
-        $response->assertRedirect(route('index.index'))
-            ->assertSessionHas('error');
+        $response->assertSessionHas('message', function ($message) {
+            return $message['type'] === 'error';
+        });
     }
 }

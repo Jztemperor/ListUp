@@ -67,6 +67,6 @@ class AccountController extends Controller
         // Send E-mail verification
         event(new Registered($user));
 
-        return redirect()->route('verification.notice');
+        return redirect()->route('login');
     }
 }
